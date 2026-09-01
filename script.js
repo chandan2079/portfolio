@@ -1,31 +1,65 @@
-// Smooth reveal animation
-const elements = document.querySelectorAll(
-    ".section, .card, .project-card, .journey-item, .contact-card"
-);
+/* =========================
+   PORTFOLIO INTRO CONTROL
+========================= */
 
-const observer = new IntersectionObserver(
-    (entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("show");
-            }
-        });
-    },
-    {
-        threshold: 0.12
+document.body.classList.add("intro-active");
+
+const intro = document.getElementById("intro");
+
+
+/* Intro ke approximately 7 seconds baad
+   normal portfolio scrolling enable */
+
+setTimeout(() => {
+
+    document.body.classList.remove("intro-active");
+
+}, 7000);
+
+
+/* Intro complete hone ke baad
+   element ko completely remove kar do */
+
+setTimeout(() => {
+
+    if (intro) {
+        intro.remove();
     }
-);
 
-elements.forEach((element) => {
-    element.classList.add("hidden");
-    observer.observe(element);
+}, 7600);
+
+
+/* =========================
+   NAVBAR ACTIVE EFFECT
+========================= */
+
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll("nav a");
+
+
+window.addEventListener("scroll", () => {
+
+    let current = "";
+
+    sections.forEach(section => {
+
+        const sectionTop = section.offsetTop - 150;
+
+        if (window.scrollY >= sectionTop) {
+            current = section.getAttribute("id");
+        }
+
+    });
+
+
+    navLinks.forEach(link => {
+
+        link.style.color = "";
+
+        if (link.getAttribute("href") === "#" + current) {
+            link.style.color = "#7b88ff";
+        }
+
+    });
+
 });
-
-
-// Current year in footer
-const footerText = document.querySelector("footer p");
-
-if (footerText) {
-    footerText.innerHTML =
-        `© ${new Date().getFullYear()} Chandan Kumar. Built with passion and curiosity.`;
-}
