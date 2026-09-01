@@ -1,64 +1,168 @@
-/* =========================
-   PORTFOLIO INTRO CONTROL
-========================= */
+/* =========================================
+   PORTFOLIO SCRIPT
+   ========================================= */
 
-document.body.classList.add("intro-active");
+document.addEventListener("DOMContentLoaded", function () {
 
-const intro = document.getElementById("intro");
+    /* =========================================
+       INTRO ANIMATION
+       ========================================= */
 
+    const introScreen = document.getElementById("intro-screen");
 
-/* Intro ke approximately 7 seconds baad
-   normal portfolio scrolling enable */
+    if (introScreen) {
 
-setTimeout(() => {
+        // Keep intro visible for around 7 seconds
+        setTimeout(function () {
 
-    document.body.classList.remove("intro-active");
+            introScreen.classList.add("intro-finished");
 
-}, 7000);
+        }, 7000);
 
+        // Remove intro from the page after animation
+        setTimeout(function () {
 
-/* Intro complete hone ke baad
-   element ko completely remove kar do */
+            introScreen.style.display = "none";
 
-setTimeout(() => {
+        }, 8000);
 
-    if (intro) {
-        intro.remove();
     }
 
-}, 7600);
+
+    /* =========================================
+       SMOOTH SCROLL
+       ========================================= */
+
+    const navigationLinks = document.querySelectorAll(
+        'a[href^="#"]'
+    );
+
+    navigationLinks.forEach(function (link) {
+
+        link.addEventListener("click", function (event) {
+
+            const targetId = this.getAttribute("href");
+
+            if (
+                targetId &&
+                targetId !== "#" &&
+                document.querySelector(targetId)
+            ) {
+
+                event.preventDefault();
+
+                const target = document.querySelector(targetId);
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+
+        });
+
+    });
 
 
-/* =========================
-   NAVBAR ACTIVE EFFECT
-========================= */
+    /* =========================================
+       NAVBAR SCROLL EFFECT
+       ========================================= */
 
-const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll("nav a");
+    const navbar = document.querySelector(".navbar");
 
+    window.addEventListener("scroll", function () {
 
-window.addEventListener("scroll", () => {
+        if (!navbar) return;
 
-    let current = "";
+        if (window.scrollY > 50) {
 
-    sections.forEach(section => {
+            navbar.classList.add("scrolled");
 
-        const sectionTop = section.offsetTop - 150;
+        } else {
 
-        if (window.scrollY >= sectionTop) {
-            current = section.getAttribute("id");
+            navbar.classList.remove("scrolled");
+
         }
 
     });
 
 
-    navLinks.forEach(link => {
+    /* =========================================
+       SCROLL REVEAL ANIMATION
+       ========================================= */
 
-        link.style.color = "";
+    const revealElements = document.querySelectorAll(
+        ".section, .card, .project-card, .timeline-item, .journey-card, .resume-box, .contact-card"
+    );
 
-        if (link.getAttribute("href") === "#" + current) {
-            link.style.color = "#7b88ff";
+    const revealObserver = new IntersectionObserver(
+
+        function (entries, observer) {
+
+            entries.forEach(function (entry) {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("visible");
+
+                    observer.unobserve(entry.target);
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold: 0.12
         }
+
+    );
+
+
+    revealElements.forEach(function (element) {
+
+        element.classList.add("reveal");
+
+        revealObserver.observe(element);
+
+    });
+
+
+    /* =========================================
+       CURRENT YEAR IN FOOTER
+       ========================================= */
+
+    const footerText = document.querySelector("footer p");
+
+    if (footerText) {
+
+        const currentYear = new Date().getFullYear();
+
+        footerText.innerHTML =
+            "© " +
+            currentYear +
+            " Chandan Kumar. Built with passion and curiosity.";
+
+    }
+
+
+    /* =========================================
+       DISABLE EMPTY PROJECT LINKS
+       ========================================= */
+
+    const emptyLinks = document.querySelectorAll(
+        '.project-links a[href="#"]'
+    );
+
+    emptyLinks.forEach(function (link) {
+
+        link.addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+        });
 
     });
 
