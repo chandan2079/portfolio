@@ -4,23 +4,7 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     /* =========================================
-       1. INTRO ANIMATION TIMING HANDLER
-       ========================================= */
-    const introScreen = document.getElementById("intro-screen");
-    if (introScreen) {
-        // Keep intro visible for ~7.6 seconds, then start fade out
-        setTimeout(function () {
-            introScreen.classList.add("intro-finished");
-        }, 7600);
-
-        // Remove intro overlay completely from view
-        setTimeout(function () {
-            introScreen.style.display = "none";
-        }, 8600);
-    }
-
-    /* =========================================
-       2. SMOOTH SCROLL NAVIGATION
+       1. SMOOTH SCROLL NAVIGATION
        ========================================= */
     const navigationLinks = document.querySelectorAll('a[href^="#"]');
     navigationLinks.forEach(function (link) {
@@ -38,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     /* =========================================
-       3. NAVBAR SCROLL EFFECT
+       2. NAVBAR SCROLL EFFECT
        ========================================= */
     const navbar = document.querySelector(".navbar");
     window.addEventListener("scroll", function () {
@@ -51,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     /* =========================================
-       4. SCROLL REVEAL ANIMATION (CARDS & SECTIONS)
+       3. SCROLL REVEAL ANIMATION
        ========================================= */
     const revealElements = document.querySelectorAll(
         ".section, .card, .project-card, .timeline-item, .journey-box, .about-card, .contact-card"
@@ -81,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     /* =========================================
-       5. AUTO-UPDATE FOOTER YEAR
+       4. AUTO-UPDATE FOOTER YEAR
        ========================================= */
     const footerText = document.querySelector("footer p");
     if (footerText) {
@@ -90,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /* =========================================
-       6. DISABLE EMPTY PROJECT PLACEHOLDER LINKS
+       5. DISABLE EMPTY PLACEHOLDER LINKS
        ========================================= */
     const emptyLinks = document.querySelectorAll('.card-links a[href="#"]');
     emptyLinks.forEach(function (link) {
