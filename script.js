@@ -1,169 +1,85 @@
 /* =========================================
-   PORTFOLIO SCRIPT
+   PORTFOLIO INTERACTION & SEQUENCE SCRIPT
    ========================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
-
-    /* =========================================
-       INTRO ANIMATION
-       ========================================= */
-
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // 1. Intro Animation Timing Handler
     const introScreen = document.getElementById("intro-screen");
-
+    
     if (introScreen) {
-
-        // Keep intro visible for around 7 seconds
-        setTimeout(function () {
-
+        // Animation sequence takes ~7.5s, then start fade out
+        setTimeout(() => {
             introScreen.classList.add("intro-finished");
+        }, 7600);
 
-        }, 7000);
-
-        // Remove intro from the page after animation
-        setTimeout(function () {
-
+        // Completely hide from DOM to restore full interactivity
+        setTimeout(() => {
             introScreen.style.display = "none";
-
-        }, 8000);
-
+        }, 8600);
     }
 
-
-    /* =========================================
-       SMOOTH SCROLL
-       ========================================= */
-
-    const navigationLinks = document.querySelectorAll(
-        'a[href^="#"]'
-    );
-
-    navigationLinks.forEach(function (link) {
-
-        link.addEventListener("click", function (event) {
-
-            const targetId = this.getAttribute("href");
-
-            if (
-                targetId &&
-                targetId !== "#" &&
-                document.querySelector(targetId)
-            ) {
-
-                event.preventDefault();
-
-                const target = document.querySelector(targetId);
-
-                target.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
-
-            }
-
-        });
-
-    });
-
-
-    /* =========================================
-       NAVBAR SCROLL EFFECT
-       ========================================= */
-
+    // 2. Navbar Background Blur & Scroll Listener
     const navbar = document.querySelector(".navbar");
-
-    window.addEventListener("scroll", function () {
-
+    
+    window.addEventListener("scroll", () => {
         if (!navbar) return;
-
-        if (window.scrollY > 50) {
-
+        if (window.scrollY > 40) {
             navbar.classList.add("scrolled");
-
         } else {
-
             navbar.classList.remove("scrolled");
-
         }
-
     });
 
-
-    /* =========================================
-       SCROLL REVEAL ANIMATION
-       ========================================= */
-
-    const revealElements = document.querySelectorAll(
-        ".section, .card, .project-card, .timeline-item, .journey-card, .resume-box, .contact-card"
-    );
-
-    const revealObserver = new IntersectionObserver(
-
-        function (entries, observer) {
-
-            entries.forEach(function (entry) {
-
-                if (entry.isIntersecting) {
-
-                    entry.target.classList.add("visible");
-
-                    observer.unobserve(entry.target);
-
+    // 3. Smooth Scroll Navigation for In-Page Anchor Links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    
+    anchorLinks.forEach(link => {
+        link.addEventListener("click", function (e) {
+            const targetId = this.getAttribute("href");
+            
+            if (targetId && targetId !== "#") {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
                 }
-
-            });
-
-        },
-
-        {
-            threshold: 0.12
-        }
-
-    );
-
-
-    revealElements.forEach(function (element) {
-
-        element.classList.add("reveal");
-
-        revealObserver.observe(element);
-
-    });
-
-
-    /* =========================================
-       CURRENT YEAR IN FOOTER
-       ========================================= */
-
-    const footerText = document.querySelector("footer p");
-
-    if (footerText) {
-
-        const currentYear = new Date().getFullYear();
-
-        footerText.innerHTML =
-            "© " +
-            currentYear +
-            " Chandan Kumar. Built with passion and curiosity.";
-
-    }
-
-
-    /* =========================================
-       DISABLE EMPTY PROJECT LINKS
-       ========================================= */
-
-    const emptyLinks = document.querySelectorAll(
-        '.project-links a[href="#"]'
-    );
-
-    emptyLinks.forEach(function (link) {
-
-        link.addEventListener("click", function (event) {
-
-            event.preventDefault();
-
+            }
         });
-
     });
 
+    // 4. Interactive Intersection Observer for Cards Reveal
+    const observerOptions = {
+        threshold: 0.12,
+        rootMargin: "0px 0px -40px 0px"
+    };
+
+    const sectionObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateY(0)";
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    const animatedCards = document.querySelectorAll(".card, .timeline-item, .about-card, .journey-box");
+    
+    animatedCards.forEach(el => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(20px)";
+        el.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
+        sectionObserver.observe(el);
+    });
+
+    // 5. Dynamic Footer Year Auto-Update
+    const footerYearElement = document.querySelector("footer p");
+    if (footerYearElement) {
+        const currentYear = new Date().getFullYear();
+        footerYearElement.innerHTML = `© ${currentYear} Chandan Kumar. Built with passion and curiosity.`;
+    }
 });
