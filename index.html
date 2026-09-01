@@ -11,363 +11,101 @@
     <title>Chandan Kumar | ECE Student</title>
 
     <link rel="stylesheet" href="style.css">
-
-    <!-- PORTFOLIO INTRO ANIMATION -->
-    <style>
-
-        /* =========================================
-           INTRO SCREEN
-           ========================================= */
-
-        #intro-screen {
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-
-            background: #080b12;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            overflow: hidden;
-
-            animation: introExit 0.9s ease 5s forwards;
-        }
-
-
-        /* Background glow */
-
-        #intro-screen::before,
-        #intro-screen::after {
-            content: "";
-            position: absolute;
-
-            width: 500px;
-            height: 500px;
-
-            border-radius: 50%;
-
-            filter: blur(110px);
-
-            opacity: 0.15;
-
-            animation: floatingLight 5s ease-in-out infinite alternate;
-        }
-
-
-        #intro-screen::before {
-            top: -250px;
-            left: -150px;
-
-            background: #315cff;
-        }
-
-
-        #intro-screen::after {
-            bottom: -250px;
-            right: -150px;
-
-            background: #7a35ff;
-
-            animation-delay: 1s;
-        }
-
-
-        /* Main intro content */
-
-        .intro-content {
-            position: relative;
-            z-index: 2;
-
-            text-align: center;
-
-            animation: introAppear 1.2s ease forwards;
-        }
-
-
-        /* CK */
-
-        .intro-logo {
-            font-size: 32px;
-
-            font-weight: 800;
-
-            letter-spacing: 5px;
-
-            opacity: 0;
-
-            animation: fadeUp 0.8s ease 0.2s forwards;
-        }
-
-
-        /* Line */
-
-        .intro-line {
-            width: 0;
-            height: 2px;
-
-            margin: 22px auto;
-
-            background: white;
-
-            animation: lineGrow 0.8s ease 0.7s forwards;
-        }
-
-
-        /* Name */
-
-        .intro-content h1 {
-            margin: 0;
-
-            font-size: clamp(38px, 7vw, 72px);
-
-            letter-spacing: 8px;
-
-            opacity: 0;
-
-            transform: translateY(20px);
-
-            animation: fadeUp 1s ease 1s forwards;
-        }
-
-
-        /* ECE Student */
-
-        .intro-content p {
-            margin: 15px 0 5px;
-
-            font-size: 18px;
-
-            letter-spacing: 6px;
-
-            color: #c4cad6;
-
-            opacity: 0;
-
-            animation: fadeUp 0.8s ease 1.6s forwards;
-        }
-
-
-        /* Software Engineer */
-
-        .intro-content span {
-            display: block;
-
-            font-size: 12px;
-
-            letter-spacing: 4px;
-
-            color: #8993a7;
-
-            opacity: 0;
-
-            animation: fadeUp 0.8s ease 2s forwards;
-        }
-
-
-        /* Loading bar */
-
-        .loading-box {
-            width: 260px;
-            height: 2px;
-
-            background: #252b38;
-
-            margin: 40px auto 14px;
-
-            overflow: hidden;
-        }
-
-
-        .loading-bar {
-            width: 0;
-            height: 100%;
-
-            background: white;
-
-            animation: loading 4.5s linear forwards;
-        }
-
-
-        /* Loading text */
-
-        .intro-content small {
-            color: #727c90;
-
-            font-size: 10px;
-
-            letter-spacing: 3px;
-        }
-
-
-        /* =========================================
-           ANIMATIONS
-           ========================================= */
-
-        @keyframes introAppear {
-
-            from {
-                opacity: 0;
-                transform: scale(0.96);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-
-        }
-
-
-        @keyframes fadeUp {
-
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-        }
-
-
-        @keyframes lineGrow {
-
-            from {
-                width: 0;
-            }
-
-            to {
-                width: 110px;
-            }
-
-        }
-
-
-        @keyframes loading {
-
-            from {
-                width: 0;
-            }
-
-            to {
-                width: 100%;
-            }
-
-        }
-
-
-        @keyframes floatingLight {
-
-            from {
-                transform: translate(0, 0) scale(1);
-            }
-
-            to {
-                transform: translate(100px, 60px) scale(1.2);
-            }
-
-        }
-
-
-        @keyframes introExit {
-
-            0% {
-                opacity: 1;
-                visibility: visible;
-            }
-
-            100% {
-                opacity: 0;
-                visibility: hidden;
-                pointer-events: none;
-            }
-
-        }
-
-
-        /* Mobile adjustment */
-
-        @media (max-width: 600px) {
-
-            .intro-content h1 {
-                font-size: 34px;
-                letter-spacing: 4px;
-            }
-
-            .intro-content p {
-                font-size: 14px;
-                letter-spacing: 4px;
-            }
-
-            .intro-content span {
-                font-size: 9px;
-                letter-spacing: 2px;
-            }
-
-            .loading-box {
-                width: 200px;
-            }
-
-        }
-
-    </style>
-
 </head>
-
 
 <body>
 
+    <!-- =========================
+         7 SECOND INTRO ANIMATION
+    ========================== -->
 
-    <!-- =========================================
-         PORTFOLIO INTRO ANIMATION
-         ========================================= -->
+    <div id="intro">
 
-    <div id="intro-screen">
+        <div class="stars"></div>
+
+        <div class="intro-glow glow-one"></div>
+        <div class="intro-glow glow-two"></div>
+
+        <!-- Student Illustration -->
+        <div class="student-scene">
+
+            <div class="desk"></div>
+
+            <div class="laptop">
+                <div class="laptop-screen">
+                    <span>&lt;/&gt;</span>
+                    <small>CODE</small>
+                </div>
+                <div class="laptop-base"></div>
+            </div>
+
+            <div class="student">
+
+                <div class="head"></div>
+
+                <div class="body">
+                    <div class="arm"></div>
+                </div>
+
+            </div>
+
+            <div class="book">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="lamp">
+                <div class="lamp-head"></div>
+                <div class="lamp-pole"></div>
+                <div class="lamp-base"></div>
+            </div>
+
+        </div>
+
+
+        <!-- Intro Text -->
 
         <div class="intro-content">
 
-            <div class="intro-logo">
-                CK.
+            <div class="intro-small">
+                WELCOME TO
             </div>
-
-            <div class="intro-line"></div>
 
             <h1>
                 CHANDAN KUMAR
             </h1>
 
-            <p>
+            <div class="intro-line"></div>
+
+            <h2>
                 ECE STUDENT
+            </h2>
+
+            <p>
+                ASPIRING SOFTWARE ENGINEER
             </p>
 
-            <span>
-                ASPIRING SOFTWARE ENGINEER
-            </span>
+            <div class="loading-area">
 
-            <div class="loading-box">
+                <div class="loading-track">
+                    <div class="loading-progress"></div>
+                </div>
 
-                <div class="loading-bar"></div>
+                <span class="loading-percent">
+                    INITIALIZING PORTFOLIO...
+                </span>
 
             </div>
-
-            <small>
-                INITIALIZING PORTFOLIO...
-            </small>
 
         </div>
 
     </div>
 
 
-
-    <!-- =========================================
+    <!-- =========================
          NAVBAR
-         ========================================= -->
+    ========================== -->
 
     <header class="navbar">
 
@@ -378,31 +116,14 @@
             </a>
 
             <nav>
-
-                <a href="#about">
-                    About
-                </a>
-
-                <a href="#skills">
-                    Skills
-                </a>
-
-                <a href="#education">
-                    Education
-                </a>
-
-                <a href="#projects">
-                    Projects
-                </a>
-
-                <a href="#journey">
-                    Journey
-                </a>
-
-                <a href="#contact">
-                    Contact
-                </a>
-
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#education">Education</a>
+                <a href="#projects">Projects</a>
+                <a href="#journey">Journey</a>
+                <a href="#achievements">Achievements</a>
+                <a href="#resume">Resume</a>
+                <a href="#contact">Contact</a>
             </nav>
 
         </div>
@@ -410,15 +131,15 @@
     </header>
 
 
-
     <main>
 
-
-        <!-- =========================================
+        <!-- =========================
              HERO
-             ========================================= -->
+        ========================== -->
 
         <section id="home" class="hero">
+
+            <div class="hero-background"></div>
 
             <div class="container hero-content">
 
@@ -431,25 +152,16 @@
                 </h1>
 
                 <h2>
-
                     ECE Student
-
-                    <span>
-                        •
-                    </span>
-
+                    <span>•</span>
                     Aspiring Software Engineer
-
                 </h2>
 
                 <p class="hero-text">
-
                     First-year Electronics and Communication Engineering
                     student at Shri Mata Vaishno Devi University,
                     exploring programming, problem solving and technology.
-
                 </p>
-
 
                 <div class="buttons">
 
@@ -463,36 +175,24 @@
 
                 </div>
 
-
-
-                <!-- SOCIAL LINKS -->
-
                 <div class="social-links">
 
                     <a href="https://github.com/chandan2079"
                        target="_blank"
                        rel="noopener noreferrer">
-
                         GitHub
-
                     </a>
-
 
                     <a href="https://www.linkedin.com/in/chandan-kumar-9a03062ab/"
                        target="_blank"
                        rel="noopener noreferrer">
-
                         LinkedIn
-
                     </a>
-
 
                     <a href="https://www.instagram.com/Chandan0612_/"
                        target="_blank"
                        rel="noopener noreferrer">
-
                         Instagram
-
                     </a>
 
                 </div>
@@ -502,10 +202,9 @@
         </section>
 
 
-
-        <!-- =========================================
+        <!-- =========================
              ABOUT
-             ========================================= -->
+        ========================== -->
 
         <section id="about" class="section">
 
@@ -519,33 +218,24 @@
                     Learning today. Building tomorrow.
                 </h2>
 
-
                 <div class="about-card">
 
                     <p>
-
                         I'm Chandan Kumar, a first-year Electronics and
                         Communication Engineering student at Shri Mata
                         Vaishno Devi University.
-
                     </p>
 
-
                     <p>
-
                         I'm currently at the beginning of my engineering
                         journey and exploring programming, technology
                         and problem solving.
-
                     </p>
 
-
                     <p>
-
                         My goal is to build a strong technical foundation,
                         work on real projects and gradually grow into
-                        an aspiring software engineer.
-
+                        the technology industry.
                     </p>
 
                 </div>
@@ -555,10 +245,9 @@
         </section>
 
 
-
-        <!-- =========================================
+        <!-- =========================
              SKILLS
-             ========================================= -->
+        ========================== -->
 
         <section id="skills" class="section">
 
@@ -572,80 +261,31 @@
                     Skills & Technologies
                 </h2>
 
-
                 <div class="cards">
 
-
                     <div class="card">
-
-                        <span class="card-number">
-                            01
-                        </span>
-
-                        <h3>
-                            C Programming
-                        </h3>
-
-                        <p>
-                            Learning
-                        </p>
-
+                        <span class="card-number">01</span>
+                        <h3>C Programming</h3>
+                        <p>Learning</p>
                     </div>
 
-
-
                     <div class="card">
-
-                        <span class="card-number">
-                            02
-                        </span>
-
-                        <h3>
-                            Programming Fundamentals
-                        </h3>
-
-                        <p>
-                            Learning
-                        </p>
-
+                        <span class="card-number">02</span>
+                        <h3>Programming Fundamentals</h3>
+                        <p>Learning</p>
                     </div>
 
-
-
                     <div class="card">
-
-                        <span class="card-number">
-                            03
-                        </span>
-
-                        <h3>
-                            HTML & CSS
-                        </h3>
-
-                        <p>
-                            Exploring
-                        </p>
-
+                        <span class="card-number">03</span>
+                        <h3>HTML & CSS</h3>
+                        <p>Exploring</p>
                     </div>
 
-
-
                     <div class="card">
-
-                        <span class="card-number">
-                            04
-                        </span>
-
-                        <h3>
-                            Git & GitHub
-                        </h3>
-
-                        <p>
-                            Learning
-                        </p>
-
+                        <span class="card-number">04</span>
+                        <h3>Git & GitHub</h3>
+                        <p>Learning</p>
                     </div>
-
 
                 </div>
 
@@ -654,10 +294,9 @@
         </section>
 
 
-
-        <!-- =========================================
+        <!-- =========================
              EDUCATION
-             ========================================= -->
+        ========================== -->
 
         <section id="education" class="section">
 
@@ -671,13 +310,11 @@
                     Academic Journey
                 </h2>
 
-
                 <div class="timeline">
 
                     <div class="timeline-item">
 
                         <div class="timeline-dot"></div>
-
 
                         <div class="timeline-content">
 
@@ -685,23 +322,45 @@
                                 2026 — 2030
                             </span>
 
-
                             <h3>
                                 Electronics & Communication Engineering
                             </h3>
-
 
                             <h4>
                                 Shri Mata Vaishno Devi University
                             </h4>
 
-
                             <p>
-
                                 Currently pursuing undergraduate studies
                                 and building a strong foundation in
-                                engineering and technology.
+                                engineering, programming and technology.
+                            </p>
 
+                        </div>
+
+                    </div>
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <div class="timeline-content">
+
+                            <span class="date">
+                                2025
+                            </span>
+
+                            <h3>
+                                Class XII — Science
+                            </h3>
+
+                            <h4>
+                                JAC Board
+                            </h4>
+
+                            <p>
+                                Completed intermediate education with
+                                a focus on science and mathematics.
                             </p>
 
                         </div>
@@ -715,10 +374,9 @@
         </section>
 
 
-
-        <!-- =========================================
+        <!-- =========================
              PROJECTS
-             ========================================= -->
+        ========================== -->
 
         <section id="projects" class="section">
 
@@ -732,48 +390,100 @@
                     My Projects
                 </h2>
 
-
                 <p class="section-description">
-
                     Projects will be added here as I learn and build
                     new things throughout my engineering journey.
-
                 </p>
-
-
 
                 <div class="projects-grid">
 
+                    <article class="project-card">
+
+                        <span class="project-tag">
+                            CURRENT PROJECT
+                        </span>
+
+                        <h3>
+                            Personal Portfolio
+                        </h3>
+
+                        <p>
+                            A responsive personal portfolio website
+                            created to showcase my skills, education
+                            and engineering journey.
+                        </p>
+
+                        <div class="project-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="https://github.com/chandan2079"
+                               target="_blank">
+                                GitHub →
+                            </a>
+
+                            <a href="https://portfolio-puce-three-no1bymq1vd.vercel.app/"
+                               target="_blank">
+                                Live Demo →
+                            </a>
+                        </div>
+
+                    </article>
+
 
                     <article class="project-card">
 
                         <span class="project-tag">
-                            PLACEHOLDER
+                            COMING SOON
                         </span>
 
                         <h3>
-                            Project One
+                            C Programming Project
                         </h3>
 
                         <p>
-
-                            A future project showcasing programming
-                            and problem-solving skills.
-
+                            A programming project that will demonstrate
+                            my C programming and logical problem-solving
+                            skills.
                         </p>
 
-
                         <div class="project-tech">
-
-                            <span>
-                                Coming Soon
-                            </span>
-
+                            <span>C</span>
+                            <span>Logic</span>
                         </div>
 
+                        <div class="project-links">
+                            <a href="#">
+                                GitHub →
+                            </a>
+                        </div>
+
+                    </article>
+
+
+                    <article class="project-card">
+
+                        <span class="project-tag">
+                            COMING SOON
+                        </span>
+
+                        <h3>
+                            Future Tech Project
+                        </h3>
+
+                        <p>
+                            A future project showcasing new technologies
+                            learned during my engineering journey.
+                        </p>
+
+                        <div class="project-tech">
+                            <span>Coming Soon</span>
+                        </div>
 
                         <div class="project-links">
-
                             <a href="#">
                                 GitHub →
                             </a>
@@ -781,97 +491,9 @@
                             <a href="#">
                                 Live Demo →
                             </a>
-
                         </div>
 
                     </article>
-
-
-
-                    <article class="project-card">
-
-                        <span class="project-tag">
-                            PLACEHOLDER
-                        </span>
-
-                        <h3>
-                            Project Two
-                        </h3>
-
-                        <p>
-
-                            A future project that will be added after
-                            learning new technologies.
-
-                        </p>
-
-
-                        <div class="project-tech">
-
-                            <span>
-                                Coming Soon
-                            </span>
-
-                        </div>
-
-
-                        <div class="project-links">
-
-                            <a href="#">
-                                GitHub →
-                            </a>
-
-                            <a href="#">
-                                Live Demo →
-                            </a>
-
-                        </div>
-
-                    </article>
-
-
-
-                    <article class="project-card">
-
-                        <span class="project-tag">
-                            PLACEHOLDER
-                        </span>
-
-                        <h3>
-                            Project Three
-                        </h3>
-
-                        <p>
-
-                            A future project documenting my growth
-                            during engineering.
-
-                        </p>
-
-
-                        <div class="project-tech">
-
-                            <span>
-                                Coming Soon
-                            </span>
-
-                        </div>
-
-
-                        <div class="project-links">
-
-                            <a href="#">
-                                GitHub →
-                            </a>
-
-                            <a href="#">
-                                Live Demo →
-                            </a>
-
-                        </div>
-
-                    </article>
-
 
                 </div>
 
@@ -880,97 +502,381 @@
         </section>
 
 
+        <!-- =========================
+             LEARNING ROADMAP
+        ========================== -->
 
-        <!-- =========================================
-             LEARNING JOURNEY
-             ========================================= -->
-
-        <section id="journey" class="section">
+        <section id="journey" class="section roadmap-section">
 
             <div class="container">
 
                 <p class="section-label">
-                    LEARNING JOURNEY
+                    4 YEAR ROADMAP
                 </p>
 
                 <h2 class="section-title">
-                    My Roadmap
+                    ECE → Technology Career
                 </h2>
 
+                <p class="section-description">
+                    A practical roadmap for maintaining strong academics
+                    while building the skills required for software and
+                    technology opportunities.
+                </p>
 
-                <div class="journey-grid">
 
+                <!-- YEAR 1 -->
 
-                    <div class="journey-item">
+                <div class="roadmap-card">
 
-                        <span>
-                            01
-                        </span>
+                    <div class="roadmap-year">
+                        YEAR 01
+                    </div>
+
+                    <div class="roadmap-content">
 
                         <h3>
-                            Programming Fundamentals
+                            Foundation & Strong CGPA
                         </h3>
 
                         <p>
-                            Build a strong foundation in programming.
+                            Target: <strong>8.5+ CGPA</strong>
                         </p>
+
+                        <ul>
+                            <li>Focus seriously on every semester subject</li>
+                            <li>Learn C Programming</li>
+                            <li>Programming fundamentals</li>
+                            <li>Basic problem solving</li>
+                            <li>HTML & CSS</li>
+                            <li>Git & GitHub</li>
+                            <li>Build 2–3 small projects</li>
+                            <li>Create a professional GitHub profile</li>
+                        </ul>
 
                     </div>
 
+                </div>
 
 
-                    <div class="journey-item">
+                <!-- YEAR 2 -->
 
-                        <span>
-                            02
-                        </span>
+                <div class="roadmap-card">
+
+                    <div class="roadmap-year">
+                        YEAR 02
+                    </div>
+
+                    <div class="roadmap-content">
 
                         <h3>
-                            C / C++
+                            DSA & Development
                         </h3>
 
                         <p>
-                            Learn programming and improve logical thinking.
+                            Target: <strong>8.5+ CGPA + Strong DSA</strong>
                         </p>
+
+                        <ul>
+                            <li>C++</li>
+                            <li>Data Structures & Algorithms</li>
+                            <li>SQL</li>
+                            <li>DBMS</li>
+                            <li>Operating Systems basics</li>
+                            <li>Computer Networks basics</li>
+                            <li>JavaScript</li>
+                            <li>React fundamentals</li>
+                            <li>Build 2–3 strong projects</li>
+                            <li>Start internship preparation</li>
+                        </ul>
 
                     </div>
 
+                </div>
 
 
-                    <div class="journey-item">
+                <!-- YEAR 3 -->
 
-                        <span>
-                            03
-                        </span>
+                <div class="roadmap-card">
+
+                    <div class="roadmap-year">
+                        YEAR 03
+                    </div>
+
+                    <div class="roadmap-content">
 
                         <h3>
-                            Data Structures & Algorithms
+                            Internship → PPO
                         </h3>
 
                         <p>
-                            Develop algorithmic problem-solving skills.
+                            Target:
+                            <strong>Internship / Pre-Placement Opportunity</strong>
                         </p>
+
+                        <ul>
+                            <li>Advanced DSA</li>
+                            <li>Backend development</li>
+                            <li>REST APIs</li>
+                            <li>Cloud fundamentals</li>
+                            <li>Docker basics</li>
+                            <li>System design fundamentals</li>
+                            <li>Resume building</li>
+                            <li>LinkedIn & GitHub optimization</li>
+                            <li>Apply for internships</li>
+                            <li>Prepare for PPO / placement</li>
+                            <li>Apply off-campus as well</li>
+                        </ul>
 
                     </div>
 
+                </div>
 
 
-                    <div class="journey-item">
+                <!-- YEAR 4 -->
 
-                        <span>
-                            04
-                        </span>
+                <div class="roadmap-card">
+
+                    <div class="roadmap-year">
+                        YEAR 04
+                    </div>
+
+                    <div class="roadmap-content">
 
                         <h3>
-                            Web Development
+                            Placement & Career
                         </h3>
 
                         <p>
-                            Learn to build useful modern websites.
+                            Target:
+                            <strong>Software / Technology Role</strong>
                         </p>
+
+                        <ul>
+                            <li>Advanced interview preparation</li>
+                            <li>DSA revision</li>
+                            <li>Core CS concepts revision</li>
+                            <li>System design</li>
+                            <li>Mock interviews</li>
+                            <li>Resume refinement</li>
+                            <li>On-campus placements</li>
+                            <li>Off-campus applications</li>
+                            <li>Negotiate and evaluate offers</li>
+                        </ul>
 
                     </div>
 
+                </div>
+
+            </div>
+
+        </section>
 
 
-                    <div class="journey-item">
+        <!-- =========================
+             ACHIEVEMENTS
+        ========================== -->
+
+        <section id="achievements" class="section">
+
+            <div class="container">
+
+                <p class="section-label">
+                    ACHIEVEMENTS
+                </p>
+
+                <h2 class="section-title">
+                    Milestones
+                </h2>
+
+                <div class="achievement-grid">
+
+                    <div class="achievement-card">
+                        <span>01</span>
+                        <h3>8.5+ CGPA</h3>
+                        <p>
+                            Semester academic target
+                        </p>
+                    </div>
+
+                    <div class="achievement-card">
+                        <span>02</span>
+                        <h3>Projects</h3>
+                        <p>
+                            Practical development experience
+                        </p>
+                    </div>
+
+                    <div class="achievement-card">
+                        <span>03</span>
+                        <h3>Internship</h3>
+                        <p>
+                            Industry experience target
+                        </p>
+                    </div>
+
+                    <div class="achievement-card">
+                        <span>04</span>
+                        <h3>PPO</h3>
+                        <p>
+                            Pre-placement opportunity target
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             RESUME
+        ========================== -->
+
+        <section id="resume" class="section">
+
+            <div class="container resume-box">
+
+                <p class="section-label">
+                    RESUME
+                </p>
+
+                <h2>
+                    My Resume
+                </h2>
+
+                <p>
+                    My resume will be updated as I gain skills,
+                    complete projects and achieve new milestones.
+                </p>
+
+                <a href="#" class="btn primary">
+                    Download Resume
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CONTACT
+        ========================== -->
+
+        <section id="contact" class="section">
+
+            <div class="container">
+
+                <p class="section-label">
+                    CONTACT
+                </p>
+
+                <h2 class="section-title">
+                    Let's Connect
+                </h2>
+
+                <p class="section-description">
+                    Feel free to connect with me through my social
+                    profiles or email.
+                </p>
+
+                <div class="contact-grid">
+
+                    <a href="mailto:Chandankumar2008523@gmail.com"
+                       class="contact-card">
+
+                        <span>
+                            Email
+                        </span>
+
+                        <strong>
+                            Chandankumar2008523@gmail.com
+                        </strong>
+
+                    </a>
+
+
+                    <a href="https://github.com/chandan2079"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="contact-card">
+
+                        <span>
+                            GitHub
+                        </span>
+
+                        <strong>
+                            View Profile →
+                        </strong>
+
+                    </a>
+
+
+                    <a href="https://www.linkedin.com/in/chandan-kumar-9a03062ab/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="contact-card">
+
+                        <span>
+                            LinkedIn
+                        </span>
+
+                        <strong>
+                            View Profile →
+                        </strong>
+
+                    </a>
+
+
+                    <a href="https://www.instagram.com/Chandan0612_/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="contact-card">
+
+                        <span>
+                            Instagram
+                        </span>
+
+                        <strong>
+                            @Chandan0612_ →
+                        </strong>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <div class="container footer-content">
+
+            <p>
+                © 2026 Chandan Kumar.
+                Built with passion and curiosity.
+            </p>
+
+            <a href="#home">
+                Back to top ↑
+            </a>
+
+        </div>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
