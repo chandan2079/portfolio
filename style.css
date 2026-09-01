@@ -1,19 +1,19 @@
 /* =========================================
-   VARIABLES & COLOR PALETTE
+   VARIABLES & DESIGN SYSTEM
    ========================================= */
 :root {
-    --bg-dark: #030712;
-    --bg-card: rgba(15, 23, 42, 0.75);
-    --border-color: rgba(56, 189, 248, 0.18);
-    --border-glow: rgba(99, 102, 241, 0.5);
+    --bg-dark: #040711;
+    --bg-card: rgba(13, 22, 39, 0.85);
+    --border-color: rgba(56, 189, 248, 0.15);
+    --border-glow: rgba(147, 51, 234, 0.45);
     --cyan: #38bdf8;
-    --blue: #2563eb;
-    --purple: #9333ea;
-    --neon-blue: #00d2ff;
-    --neon-purple: #9d4edd;
+    --neon-blue: #00e5ff;
+    --purple: #a855f7;
+    --neon-purple: #c084fc;
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
-    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: "Fira Code", "Courier New", Courier, monospace;
 }
 
 * {
@@ -29,22 +29,21 @@ html {
 body {
     background-color: var(--bg-dark);
     color: var(--text-main);
-    font-family: var(--font-family);
+    font-family: var(--font-sans);
     line-height: 1.6;
     overflow-x: hidden;
 }
 
 /* =========================================
-   CINEMATIC INTRO ANIMATION SCREEN
+   FULLSCREEN INTRO ANIMATION (8s SEQUENCE)
    ========================================= */
 #intro-screen {
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100vw;
     height: 100vh;
-    background: #02040a;
-    z-index: 9999;
+    background: radial-gradient(circle at center, #0b1329 0%, #02040a 100%);
+    z-index: 99999;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -67,86 +66,92 @@ body {
     pointer-events: none;
 }
 
-/* PHASE 1: MICROCHIP & CURRENT LINES (0s - 2.5s) */
+/* -----------------------------------------
+   PHASE 1: MICROCHIP & PCB TRACES (0s - 2.2s)
+   ----------------------------------------- */
 .phase-chip {
     opacity: 0;
-    animation: phase1Anim 2.4s ease-in-out forwards;
+    animation: phase1Life 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .chip-box {
     position: relative;
     width: 130px;
     height: 130px;
-    background: radial-gradient(circle, #0f172a 30%, #020617 100%);
+    background: radial-gradient(circle, #0f172a 20%, #030712 100%);
     border: 2px solid var(--neon-blue);
-    border-radius: 14px;
-    box-shadow: 0 0 50px rgba(0, 210, 255, 0.7), inset 0 0 25px rgba(0, 210, 255, 0.5);
+    border-radius: 12px;
+    box-shadow: 0 0 50px rgba(0, 229, 255, 0.7), inset 0 0 25px rgba(0, 229, 255, 0.4);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .chip-core {
-    width: 55px;
-    height: 55px;
-    background: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #7f00ff 100%);
-    border-radius: 8px;
-    box-shadow: 0 0 35px #00d2ff;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--neon-blue), var(--purple));
+    border-radius: 6px;
+    box-shadow: 0 0 35px var(--neon-blue);
     animation: corePulse 1.2s infinite alternate ease-in-out;
 }
 
 .circuit-line {
     position: absolute;
-    background: linear-gradient(90deg, transparent, #00d2ff, transparent);
-    box-shadow: 0 0 12px #00d2ff;
+    background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+    box-shadow: 0 0 12px var(--neon-blue);
 }
 
-.cl-1 { top: -80px; left: 50%; width: 3px; height: 80px; transform: translateX(-50%); }
-.cl-2 { bottom: -80px; left: 50%; width: 3px; height: 80px; transform: translateX(-50%); }
-.cl-3 { left: -80px; top: 50%; width: 80px; height: 3px; transform: translateY(-50%); }
-.cl-4 { right: -80px; top: 50%; width: 80px; height: 3px; transform: translateY(-50%); }
+.cl-1 { top: -75px; left: 50%; width: 2.5px; height: 75px; transform: translateX(-50%); }
+.cl-2 { bottom: -75px; left: 50%; width: 2.5px; height: 75px; transform: translateX(-50%); }
+.cl-3 { left: -75px; top: 50%; width: 75px; height: 2.5px; transform: translateY(-50%); }
+.cl-4 { right: -75px; top: 50%; width: 75px; height: 2.5px; transform: translateY(-50%); }
 
-/* PHASE 2: SATELLITE & SIGNALS (2.2s - 4.5s) */
+/* -----------------------------------------
+   PHASE 2: SIGNALS & SATELLITE WAVES (2.1s - 4.2s)
+   ----------------------------------------- */
 .phase-signals {
     opacity: 0;
-    animation: phase2Anim 2.3s ease-in-out 2.2s forwards;
+    animation: phase2Life 2.1s cubic-bezier(0.4, 0, 0.2, 1) 2.1s forwards;
 }
 
 .signal-wave {
     position: absolute;
     border-radius: 50%;
-    border: 2px solid var(--neon-purple);
-    box-shadow: 0 0 30px rgba(157, 78, 221, 0.8), inset 0 0 15px rgba(157, 78, 221, 0.4);
-    animation: wavePulse 1.8s infinite ease-out;
+    border: 2px solid var(--purple);
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.8), inset 0 0 15px rgba(168, 85, 247, 0.4);
+    animation: waveExpand 1.6s infinite ease-out;
 }
 
-.w1 { width: 160px; height: 160px; animation-delay: 0s; }
-.w2 { width: 280px; height: 280px; animation-delay: 0.35s; }
-.w3 { width: 420px; height: 420px; animation-delay: 0.7s; }
+.w1 { width: 140px; height: 140px; animation-delay: 0s; }
+.w2 { width: 260px; height: 260px; animation-delay: 0.35s; }
+.w3 { width: 380px; height: 380px; animation-delay: 0.7s; }
 
-/* PHASE 3: CODING DESK NODES (4.2s - 6.4s) */
+/* -----------------------------------------
+   PHASE 3: CODING & NODES (4.1s - 6.2s)
+   ----------------------------------------- */
 .phase-study {
     opacity: 0;
-    animation: phase3Anim 2.2s ease-in-out 4.2s forwards;
+    animation: phase3Life 2.1s cubic-bezier(0.4, 0, 0.2, 1) 4.1s forwards;
 }
 
 .floating-tech-nodes {
     display: flex;
     gap: 45px;
     font-size: 2.2rem;
-    font-family: "Courier New", Courier, monospace;
-    font-weight: bold;
+    font-family: var(--font-mono);
+    font-weight: 700;
     color: var(--neon-blue);
-    text-shadow: 0 0 20px #00d2ff, 0 0 40px #00d2ff;
+    text-shadow: 0 0 25px var(--neon-blue);
 }
 
 .floating-tech-nodes span {
-    animation: nodeBob 1.6s infinite alternate ease-in-out;
+    animation: nodeBob 1.5s infinite alternate ease-in-out;
 }
 
 .floating-tech-nodes span:nth-child(2) {
     color: var(--neon-purple);
-    text-shadow: 0 0 20px #9d4edd;
+    text-shadow: 0 0 25px var(--purple);
     animation-delay: 0.4s;
 }
 
@@ -154,24 +159,26 @@ body {
     animation-delay: 0.8s;
 }
 
-/* PHASE 4: NAME & REVEAL (6.2s - End) */
+/* -----------------------------------------
+   PHASE 4: NAME & REVEAL (6.1s - END)
+   ----------------------------------------- */
 .phase-reveal {
     opacity: 0;
     flex-direction: column;
     text-align: center;
-    animation: phase4Anim 1.8s cubic-bezier(0.16, 1, 0.3, 1) 6.2s forwards;
+    animation: phase4Life 1.8s cubic-bezier(0.16, 1, 0.3, 1) 6.1s forwards;
 }
 
 .intro-badge {
     font-size: 1.4rem;
     font-weight: 800;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     color: var(--neon-blue);
-    border: 1px solid var(--neon-blue);
+    border: 1.5px solid var(--neon-blue);
     padding: 6px 16px;
     border-radius: 8px;
     margin-bottom: 18px;
-    box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.4);
 }
 
 .intro-title {
@@ -188,7 +195,7 @@ body {
     font-weight: 700;
     letter-spacing: 4px;
     color: var(--neon-purple);
-    text-shadow: 0 0 20px rgba(157, 78, 221, 0.8);
+    text-shadow: 0 0 20px rgba(192, 132, 252, 0.8);
     margin-bottom: 6px;
 }
 
@@ -196,7 +203,7 @@ body {
     font-size: 0.9rem;
     letter-spacing: 3px;
     color: var(--text-muted);
-    margin-bottom: 26px;
+    margin-bottom: 24px;
 }
 
 .loading-wrapper {
@@ -205,15 +212,15 @@ body {
     background: rgba(255, 255, 255, 0.08);
     border-radius: 4px;
     overflow: hidden;
-    box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
 }
 
 .loading-progress-bar {
     width: 0%;
     height: 100%;
-    background: linear-gradient(90deg, #00d2ff, #7f00ff);
-    box-shadow: 0 0 20px #00d2ff;
-    animation: fillLoading 1.4s ease-in-out 6.3s forwards;
+    background: linear-gradient(90deg, var(--neon-blue), var(--purple));
+    box-shadow: 0 0 20px var(--neon-blue);
+    animation: fillLoader 1.4s ease-in-out 6.2s forwards;
 }
 
 .loading-status {
@@ -221,13 +228,13 @@ body {
     letter-spacing: 2px;
     color: var(--text-muted);
     margin-top: 12px;
-    font-family: monospace;
+    font-family: var(--font-mono);
 }
 
 /* =========================================
-   KEYFRAMES
+   KEYFRAME SEQUENCES
    ========================================= */
-@keyframes phase1Anim {
+@keyframes phase1Life {
     0% { opacity: 0; transform: scale(0.8); }
     20%, 75% { opacity: 1; transform: scale(1); }
     100% { opacity: 0; transform: scale(1.15); filter: blur(4px); }
@@ -235,21 +242,21 @@ body {
 
 @keyframes corePulse {
     0% { transform: scale(0.92); opacity: 0.75; }
-    100% { transform: scale(1.08); opacity: 1; filter: drop-shadow(0 0 15px #00d2ff); }
+    100% { transform: scale(1.08); opacity: 1; filter: drop-shadow(0 0 15px var(--neon-blue)); }
 }
 
-@keyframes phase2Anim {
+@keyframes phase2Life {
     0% { opacity: 0; transform: scale(0.85); }
     20%, 75% { opacity: 1; transform: scale(1); }
     100% { opacity: 0; transform: scale(1.2); filter: blur(4px); }
 }
 
-@keyframes wavePulse {
+@keyframes waveExpand {
     0% { transform: scale(0.5); opacity: 1; }
     100% { transform: scale(1.5); opacity: 0; }
 }
 
-@keyframes phase3Anim {
+@keyframes phase3Life {
     0% { opacity: 0; transform: translateY(20px); }
     20%, 75% { opacity: 1; transform: translateY(0); }
     100% { opacity: 0; transform: translateY(-20px); filter: blur(4px); }
@@ -260,18 +267,18 @@ body {
     100% { transform: translateY(8px); }
 }
 
-@keyframes phase4Anim {
+@keyframes phase4Life {
     0% { opacity: 0; transform: scale(0.95); }
     100% { opacity: 1; transform: scale(1); }
 }
 
-@keyframes fillLoading {
+@keyframes fillLoader {
     0% { width: 0%; }
     100% { width: 100%; }
 }
 
 /* =========================================
-   LAYOUT & MAIN SITE
+   LAYOUT & NAVBAR
    ========================================= */
 .container {
     max-width: 1050px;
@@ -284,15 +291,15 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 100;
+    z-index: 1000;
     padding: 18px 0;
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(14px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     transition: all 0.3s ease;
 }
 
 .navbar.scrolled {
-    background: rgba(3, 7, 18, 0.9);
+    background: rgba(4, 7, 17, 0.9);
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -323,14 +330,16 @@ nav a:hover {
     color: var(--cyan);
 }
 
-/* HERO */
+/* =========================================
+   HERO SECTION
+   ========================================= */
 .hero {
     min-height: 90vh;
     display: flex;
     align-items: center;
     padding-top: 100px;
     background: radial-gradient(circle at 85% 25%, rgba(56, 189, 248, 0.1) 0%, transparent 45%),
-                radial-gradient(circle at 15% 75%, rgba(147, 51, 234, 0.1) 0%, transparent 45%);
+                radial-gradient(circle at 15% 75%, rgba(168, 85, 247, 0.1) 0%, transparent 45%);
 }
 
 .hero-tag {
@@ -384,7 +393,7 @@ nav a:hover {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    background: linear-gradient(135deg, #2563eb, var(--cyan));
     color: #030712;
     box-shadow: 0 0 20px rgba(56, 189, 248, 0.35);
 }
@@ -421,7 +430,9 @@ nav a:hover {
     color: var(--cyan);
 }
 
-/* SECTIONS & CARDS */
+/* =========================================
+   SECTIONS & CARDS
+   ========================================= */
 .section {
     padding: 85px 0;
 }
@@ -502,7 +513,9 @@ nav a:hover {
     font-size: 0.9rem;
 }
 
-/* TIMELINE */
+/* =========================================
+   TIMELINE (ACADEMICS)
+   ========================================= */
 .timeline {
     border-left: 2px solid var(--border-color);
     margin-left: 10px;
@@ -549,13 +562,19 @@ nav a:hover {
     font-size: 0.9rem;
 }
 
-/* BADGES */
+/* =========================================
+   PROJECTS & STATUS BADGES
+   ========================================= */
+.project-card {
+    position: relative;
+}
+
 .badge-soon {
     display: inline-block;
     font-size: 0.75rem;
-    background: rgba(147, 51, 234, 0.15);
+    background: rgba(168, 85, 247, 0.15);
     color: var(--purple);
-    border: 1px solid rgba(147, 51, 234, 0.4);
+    border: 1px solid rgba(168, 85, 247, 0.4);
     padding: 3px 8px;
     border-radius: 6px;
     margin-bottom: 12px;
@@ -575,7 +594,9 @@ nav a:hover {
     margin-top: 4px;
 }
 
-/* CONTACT */
+/* =========================================
+   CONTACT & FOOTER
+   ========================================= */
 .contact-grid {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
@@ -617,7 +638,9 @@ footer {
     text-decoration: none;
 }
 
-/* RESPONSIVE */
+/* =========================================
+   RESPONSIVE DESIGN
+   ========================================= */
 @media (max-width: 768px) {
     .hero-name { font-size: 2.5rem; }
     .hero-role { font-size: 1.1rem; }
